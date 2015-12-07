@@ -27,6 +27,8 @@ def reload(city)
   p @jhash = JSON.parse(api_result)
 
   @main = ''
+  @name = @jhash['name']
+
   @jhash['main'].each do |w|
     title_tag = w[0]
     info_item = w[1]

@@ -1,3 +1,37 @@
+<div clas="container">
+<div style="position: fixed; z-index: -99; width: 50%; height: 50%">
+  <iframe frameborder="0" height="100%" width="100%"
+    src="https://youtube.com/embed/TiVIFMbwxOc?autoplay=1&controls=0&showinfo=0&autohide=1">
+  </iframe>
+</div>
+<table>
+  <th>Weather in <%= @city %></th>
+  <hr noshade>
+  <tr>
+    <td><%= @main %></td>
+  </tr>
+
+
+</table>
+<% if @name == 'Paris' %>
+<p><%= @name %></p>
+<style>
+</style>
+<% else %>
+<p> LoL, thats not even a city!</p>
+  <% end %>
+
+<hr noshade>
+<form action='/' method='post'>
+  <input type="text" name="city_name" placeholder="Enter New City name">
+  <input type="submit">
+</form>
+
+
+</div>
+
+
+
 <style>
 h1 {
   color: blue;
@@ -33,7 +67,6 @@ ul {
 
 .container h1 {
   font-size: 30pt;
-
 }
 
 nav {
@@ -100,19 +133,3 @@ form.quirks {
   width: 200px;
 }
 </style>
-<div clas="container">
-<table>
-  <th>Weather in <%= @city %></th>
-  <hr noshade>
-  <tr>
-    <td><%= @main %></td>
-  </tr>
-
-</table>
-
-<hr noshade>
-<form action='/' method='post'>
-  <input type="text" name="city_name" placeholder="Enter New City name">
-  <input type="submit">
-</form>
-</div>

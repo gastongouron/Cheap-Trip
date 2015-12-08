@@ -7,13 +7,11 @@ window.onload = function() {
     div.style.display = 'block';
   }
 
-$("#find-subj").autocomplete({
-    source: availableTags,
-    messages: {
-        noResults: '',
-        results: function() {}
-    }
-});
-
-
+  $("#find-subj").autocomplete({
+      source: availableTags,
+      messages: {
+          noResults: '',
+          results: function() {}
+      }
+  });
 };

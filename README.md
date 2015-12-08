@@ -1,8 +1,7 @@
 # Weather<3usic
 
-**Play a funny (soon random) youtube song if the weather is good**
-
-**Play a shitty depressing (soon random) youtube song if the weather is bad**
+**Play a random happy music from a local artist from youtube if the weather is good**
+**Play a random shitty depressing song from a local artist from youtube if the weather is bad**
 
 ### To fix
 

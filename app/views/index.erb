@@ -1,0 +1,40 @@
+<div clas="container">
+
+<form action='/' method='post'>
+  <input type="text" name="city_name" placeholder="Enter New City name">
+  <input type="submit">
+</form>
+
+
+<table>
+
+<h1><%= @description %></h1>
+<h1><%= @city %></h1>
+
+
+    <br> <%= @name %>
+    <br> <%= @id %>
+    <br> <%= @description %>
+    <br> <%= @base %>
+    <br> <%= @temp %>
+    <br> <%= @pressure %>
+    <br> <%= @humidity %>
+    <br> <%= @windspeed %>
+    <br> <%= @winddeg %>
+    <br> <%= @clouds %>
+    <br> <%= @windspeed %>
+    <br> <%= @country %>
+    <br> <%= @lon %>
+    <br> <%= @lat %>
+
+
+<% if @name == 'Paris' %>
+<p><%= @name %></p>
+<style>
+</style>
+<% else %>
+<p> LoL, thats not even a city!</p>
+  <% end %>
+
+
+</div>

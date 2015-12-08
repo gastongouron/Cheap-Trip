@@ -1,8 +1,8 @@
 # Weather<3usic
 
-**Play a funny youtube song if the weather is good**
+**Play a funny (soon random) youtube song if the weather is good**
 
-**Play a shitty depressing youtube song if the weather is bad**
+**Play a shitty depressing (soon random) youtube song if the weather is bad**
 
 ### To fix
 
@@ -16,7 +16,6 @@
 * Use Youtube API ASAP
 * Play youtube video as backgorund
 * Find user location automatically
-
 
 ### To do
 

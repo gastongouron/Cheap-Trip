@@ -1,4 +1,3 @@
-
 window.onload = function() {
   var div = document.getElementById('search');
   if (div.style.display !== 'none') {
@@ -7,11 +6,13 @@ window.onload = function() {
     div.style.display = 'block';
   }
 
-  $("#find-subj").autocomplete({
-      source: availableTags,
-      messages: {
-          noResults: '',
-          results: function() {}
-      }
-  });
+  // $("#find-subj").autocomplete({
+  //     source: availableTags,
+  //     messages: {
+  //         noResults: '',
+  //         results: function() {}
+  //     }
+  // });
+
+
 };

@@ -19,68 +19,42 @@ def reload(city)
   api_result = RestClient.get 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + api_key
   p @jhash = JSON.parse(api_result)
 
-  @main = ''
-  @name = @jhash['name']
-
-  @jhash['main'].each do |w|
-    title_tag = w[0]
-    info_item = w[1]
-    @main << "<tr><td>#{title_tag}</td><td>#{info_item}</td></tr>"
-  end
-
-  @jhash['sys'].each do |l|
-    title = l[0]
-    info = l[1]
-    @main << "<tr><td>#{title}</td><td>#{info}</td></tr>"
-  end
-
-  #@main << @jhash['name']
-  @jhash['coord'].each do |c|
-    title = c[0]
-    info = c[1]
-  @main << "<tr><td>#{title}</td><td>#{info}</td></tr>"
-  end
-
-  @jhash['wind'].each do |s|
-    title = s[0]
-    info = s[1]
-  @main << "<tr><td>#{title}</td><td>#{info}</td></tr>"
-  end
-
-  @jhash['weather'][0].each do |w|
-    title = w[0]
-    info = w[1]
-    @main << "<tr><td>#{title}</td><td>#{info}</td></tr>"
-  end
+    @name = @jhash['name']
+    @id = @jhash['weather'][0]['id']
+    @description = @jhash['weather'][0]['description']
+    @base = @jhash['base']
+    @temp = @jhash['main']['temp']
+    @pressure = @jhash['main']['pressure']
+    @humidity = @jhash['main']['humidity']
+    @windspeed = @jhash['wind']['speed']
+    @winddeg = @jhash['wind']['deg']
+    @clouds = @jhash['clouds']['all']
+    @windspeed = @jhash['wind']['speed']
+    @country = @jhash['sys']['country']
+    @lon = @jhash['coord']['lon']
+    @lat = @jhash['coord']['lat']
 
 end
 
 
 # {"coord"=> {"lon"=>2.35,
 #             "lat"=>48.85},
-
 #  "weather"=> [
 #               {"id"=>800,
 #                "main"=>"Clear",
 #                "description"=>"Sky is Clear",
 #                "icon"=>"01n"}
 #                ],
-
 #  "base"=>"cmc stations",
-
 #  "main"=>{"temp"=>281.82,
 #           "pressure"=>1028,
 #           "humidity"=>87,
 #           "temp_min"=>281.15,
 #           "temp_max"=>282.15},
-
 #   "wind"=>{ "speed"=>2.1,
 #             "deg"=>200},
-
 #   "clouds"=>{"all"=>0},
-
 #   "dt"=>1449451800,
-
 #   "sys"=>{"type"=>1,
 #           "id"=>5615,
 #           "message"=>0.0041,

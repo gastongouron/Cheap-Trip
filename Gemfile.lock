@@ -12,6 +12,8 @@ GEM
       rdoc (>= 2.4.2)
     rest-open-uri (1.0.0)
     rubygems-update (2.5.0)
+    shotgun (0.9.1)
+      rack (>= 1.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -27,6 +29,7 @@ DEPENDENCIES
   rest-client
   rest-open-uri
   rubygems-update
+  shotgun
   sinatra
 
 BUNDLED WITH

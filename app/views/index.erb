@@ -1,40 +1,161 @@
-<div clas="container">
-
-<form action='/' method='post'>
-  <input type="text" name="city_name" placeholder="Enter New City name">
-  <input type="submit">
-</form>
-
-
-<table>
-
-<h1><%= @description %></h1>
-<h1><%= @city %></h1>
-
-
-    <br> <%= @name %>
-    <br> <%= @id %>
-    <br> <%= @description %>
-    <br> <%= @base %>
-    <br> <%= @temp %>
-    <br> <%= @pressure %>
-    <br> <%= @humidity %>
-    <br> <%= @windspeed %>
-    <br> <%= @winddeg %>
-    <br> <%= @clouds %>
-    <br> <%= @windspeed %>
-    <br> <%= @country %>
-    <br> <%= @lon %>
-    <br> <%= @lat %>
-
-
-<% if @name == 'Paris' %>
-<p><%= @name %></p>
-<style>
-</style>
-<% else %>
-<p> LoL, thats not even a city!</p>
-  <% end %>
-
-
+<div align="center">
+    <br>
+    <form action='/' method='post'>
+        <br><br>
+        <input class="search" id="search" type="text" name="city_name" placeholder="<%= @city %>" />
+        <input type="submit" id="search-button" type="submit"
+       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+       tabindex="-1" value="" />
+    </form>
+  <br>
 </div>
+
+<div class="info">
+    <div class="info__inner">
+        <p>
+            <b>Name: </b><%= @name %> /
+            <b>Country: </b><%= @country %> /
+            <b>Description: </b><%= @description %> /
+            <b>Pressure: </b><%= @pressure %> hpa /
+            <b>Humidity: </b><%= @humidity %> /
+            <b>Cloudiness: </b><%= @clouds %> /
+            <b>Wind speed: </b><%= @windspeed %> /
+            <b>Wind temperature: </b><%= @winddeg %> /
+            <b>Longitude: </b><%= @lon %> /
+            <b>Latitude: </b><%= @lat %> /
+            <b>Sunrise: </b><%= @sunrise %> /
+            <b>Sunset: </b><%= @sunrise %> /
+            <b>Country/state: </b><%= @country %><br>
+            <b>Info from: </b><%= @base %><br>
+            <b>City id: </b><%= @id %><br>
+            <!-- <hr> -->
+        </p>
+
+        <p><iframe src="http://ghbtns.com/github-btn.html?user=gastongouron&amp;repo=weather-app&amp;type=watch&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="77px" height="30px"></iframe></p>
+    </div>
+</div>
+
+<!--
+<div class="row">
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+<div class="col">&#9884;</div>
+</div>
+
+
+<div class="row">
+<div class="col" style="width:80%">80%</div>
+<div class="col">&#9884;</div>
+</div>
+
+<div class="row">
+<div class="col" style="width:40%">40%</div>
+<div class="col" style="width:20%">20%</div>
+<div class="col" style="width:40%">40%</div>
+</div>
+
+<div class="row">
+<div class="col">&#9884;</div>
+<div class="col" style="width:425px">425px</div>
+</div>
+
+<div class="row">
+<div class="col" style="width:15%">15%</div>
+<div class="col" style="width:200px">200px</div>
+<div class="col">&#9884;</div>
+<div class="col" style="width:25%">25%</div>
+</div>
+-->
+
+

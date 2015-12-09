@@ -15,7 +15,6 @@ end
 private
 
 
-
 def reload(city)
   api_key = ENV['SECRET2']
   api_result = RestClient.get 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + api_key

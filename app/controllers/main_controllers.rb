@@ -1,21 +1,88 @@
-RANDOM_CITIES = ['Paris','New-York','Bei-Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin', 'Bangkok', 'Seoul','Tokyo']
+DEVELOPER_KEY = ENV['SECRET1']
+DEVELOPER_KEY2 = ENV['SECRET2']
+YOUTUBE_API_SERVICE_NAME = 'youtube'
+YOUTUBE_API_VERSION = 'v3'
+RANDOM_CITIES = ['Paris','New-York','Bei-Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin', 'Bangkok', 'Seoul','Tokyo','Rio','Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
 
+
+# Routes
 get '/' do
+  main
+  @a.to_s
   @city = params[:city_name] ||= RANDOM_CITIES.sample
   reload(@city)
   erb :index, :locals => {results: @intro}
 end
 
 post '/' do
+  main
   @city = params[:city_name] || 'Paris'
   reload(@city)
   erb :'index'
 end
 
+
+def get_service
+  client = Google::APIClient.new(
+    :key => DEVELOPER_KEY,
+    :authorization => nil,
+    :application_name => $PROGRAM_NAME,
+    :application_version => '1.0.0')
+  youtube = client.discovered_api(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION)
+  return client, youtube
+end
+
+def main
+
+  opts = Trollop::options do
+    opt :q, '', :type => String, :default => @city
+    opt :max_results, 'Max results', :type => :int, :default => 1 #<- amount of results
+  end
+  client, youtube = get_service
+
+  begin
+
+    search_response = client.execute!(
+      :api_method => youtube.search.list,
+      :parameters => {
+        :part => 'snippet',
+        :q => opts[:q],
+        :maxResults => opts[:max_results]
+      }
+    )
+    @id = []
+    @videos = []
+    @channels = []
+    @playlists = []
+
+    search_response.data.items.each do |search_result|
+      case search_result.id.kind
+        when 'youtube#video'
+          @videos << "(#{search_result.snippet.title}) (#{search_result.id.videoId})"
+        when 'youtube#channel'
+          @channels << "#{search_result.snippet.title} (#{search_result.id.channelId})"
+        when 'youtube#playlist'
+          @playlists << "#{search_result.snippet.title} (#{search_result.id.playlistId})"
+      end
+    end
+
+    puts @videos
+
+
+    # puts "Videos:\n", videos, "\n"
+    # puts "Channels:\n", channels, "\n"
+    # puts "Playlists:\n", playlists, "\n"
+    rescue Google::APIClient::TransmissionError => e
+    puts e.result.body
+  end
+end
+
+# OpenweatherMaps API call
 private
 
 def reload(city)
-  api_key = '501bc85a381f6c157ba0ae1458b4ae6d'
+
+  api_key = ENV['SECRET2']
   api_result = RestClient.get 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + api_key
     @jhash = JSON.parse(api_result)
 
@@ -35,5 +102,6 @@ def reload(city)
     @sunset      = @jhash['sys']['sunset']
     @lon         = @jhash['coord']['lon']
     @lat         = @jhash['coord']['lat']
-
 end
+
+

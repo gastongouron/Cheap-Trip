@@ -6,6 +6,9 @@ window.onload = function() {
     div.style.display = 'block';
   }
 
+};
+
+  // think about a way to get rid of jquery behaviors such as dropdown when input city name
   // $("#find-subj").autocomplete({
   //     source: availableTags,
   //     messages: {
@@ -15,8 +18,5 @@ window.onload = function() {
   // });
 
 
-
-
-};
 
 

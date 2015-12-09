@@ -1,4 +1,4 @@
-# Weather<3usic
+# Weather<3usic(day3)
 
 **Play a random happy music from a local artist from youtube if the weather is good**
 **Play a random shitty depressing song from a local artist from youtube if the weather is bad**
@@ -21,3 +21,4 @@
 * Deploy on heroku -> Failed (because of gitignore, add keys in heroku admin panel)
 * Have fun trying to use Heroku mobile instructon to implement a mobile version even if totally -> next week
 * Use wikipedia api to find a random local artist from the location picked by the user, user this variable to querry a song (prob the most famous since the first) on youtube
+

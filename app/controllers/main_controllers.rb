@@ -7,20 +7,21 @@ RANDOM_CITIES = ['Paris','New-York','Bei-Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin
 
 # Routes
 get '/' do
-  @n = 'BVBWQscPWZs'
+  main
+  @a.to_s
   @city = params[:city_name] ||= RANDOM_CITIES.sample
   reload(@city)
   erb :index, :locals => {results: @intro}
 end
 
 post '/' do
-  @n = 'BVBWQscPWZs'
+  main
   @city = params[:city_name] || 'Paris'
   reload(@city)
   erb :'index'
 end
 
-# Youtube API call
+
 def get_service
   client = Google::APIClient.new(
     :key => DEVELOPER_KEY,
@@ -32,8 +33,9 @@ def get_service
 end
 
 def main
+
   opts = Trollop::options do
-    opt :q, '', :type => String, :default => 'San Francisco'
+    opt :q, '', :type => String, :default => @city
     opt :max_results, 'Max results', :type => :int, :default => 1 #<- amount of results
   end
   client, youtube = get_service
@@ -48,40 +50,32 @@ def main
         :maxResults => opts[:max_results]
       }
     )
-    id = []
-    videos = []
-    channels = []
-    playlists = []
+    @id = []
+    @videos = []
+    @channels = []
+    @playlists = []
 
     search_response.data.items.each do |search_result|
       case search_result.id.kind
         when 'youtube#video'
-          videos << "#{search_result.snippet.title}"
-          id << "#{search_result.id.videoId}"
+          @videos << "(#{search_result.snippet.title}) (#{search_result.id.videoId})"
         when 'youtube#channel'
-          channels << "#{search_result.snippet.title} (#{search_result.id.channelId})"
+          @channels << "#{search_result.snippet.title} (#{search_result.id.channelId})"
         when 'youtube#playlist'
-          playlists << "#{search_result.snippet.title} (#{search_result.id.playlistId})"
+          @playlists << "#{search_result.snippet.title} (#{search_result.id.playlistId})"
       end
     end
 
-    # @rez = videos
-    # @rez.each do |codeline|
-    #   codeline.split()
-    # end
+    puts @videos
 
-    @youtube_id = id
-    @song = videos
 
-    puts "Videos:\n", videos, "\n"
-    puts "Channels:\n", channels, "\n"
-    puts "Playlists:\n", playlists, "\n"
-  rescue Google::APIClient::TransmissionError => e
+    # puts "Videos:\n", videos, "\n"
+    # puts "Channels:\n", channels, "\n"
+    # puts "Playlists:\n", playlists, "\n"
+    rescue Google::APIClient::TransmissionError => e
     puts e.result.body
   end
 end
-
-main
 
 # OpenweatherMaps API call
 private
@@ -108,6 +102,6 @@ def reload(city)
     @sunset      = @jhash['sys']['sunset']
     @lon         = @jhash['coord']['lon']
     @lat         = @jhash['coord']['lat']
-
 end
+
 

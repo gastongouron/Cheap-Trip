@@ -5,8 +5,10 @@ window.onload = function() {
   } else {
     div.style.display = 'block';
   }
+};
 
-$( "#search" ).autocomplete({
+
+$("#search").autocomplete({
     source: "/app/friends",
     minLength: 2,
     response: function( event, ui ) {
@@ -16,9 +18,6 @@ $( "#search" ).autocomplete({
         $(".ui-autocomplete").hide();
     }
 });
-
-};
-
   // think about a way to get rid of jquery behaviors such as dropdown when input city name
   // $("#find-subj").autocomplete({
   //     source: availableTags,

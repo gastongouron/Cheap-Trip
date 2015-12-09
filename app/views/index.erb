@@ -29,7 +29,7 @@ function initMap() {
       src="https://maps.googleapis.com/maps/api/js?key=<%=DEVELOPER_KEY%>&callback=initMap">
 </script>
 
-<div id="player"></div>
+<div style="display: none" id="player"></div>
 <script type="text/javascript">
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -45,8 +45,9 @@ function initMap() {
         player = new YT.Player('player', {
           height: '10%',
           width: '10%',
-          // videoId: '<%= @youtube_id %>',
-          videoId: 'R5UKeCMBvVc',
+          autohide: 1,
+          videoId: <%= @yid %>,
+          // videoId: 'R5UKeCMBvVc',
           events: {
             'onReady': onPlayerReady,
             // 'onStateChange': onPlayerStateChange

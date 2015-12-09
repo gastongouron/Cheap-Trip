@@ -7,16 +7,17 @@ RANDOM_CITIES = ['Paris','New-York','Bei-Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin
 
 # Routes
 get '/' do
-  main
   @city = params[:city_name] ||= RANDOM_CITIES.sample
+  main(@city)
+
   reload(@city)
   erb :index, :locals => {results: @intro}
 end
 
 post '/' do
-  @city = params[:city_name] || 'Paris'
+  @city = params[:city_name] ||= RANDOM_CITIES.sample
   reload(@city)
-  main
+  main(@city)
   erb :'index'
 end
 
@@ -61,10 +62,10 @@ def get_service
   return client, youtube
 end
 
-def main
+def main(city)
 
   opts = Trollop::options do
-    opt :q, '', :type => String, :default => 'Necro beautiful music for you to'
+    opt :q, '', :type => String, :default => city
     opt :max_results, 'Max results', :type => :int, :default => 1 #<- amount of results
   end
   client, youtube = get_service

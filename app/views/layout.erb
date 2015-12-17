@@ -6,10 +6,22 @@
   <meta name="viewport" content="width=640">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="js/app.js">
   <title>WeatherMusic</title>
 </head>
 
 <body>
+<div align="center">
+    <br>
+    <form action='/' method='post'>
+
+        <input class="search" id="search" type="text" name="city_name" placeholder="<%= @city %>" />
+        <input type="submit" id="search-button" type="submit"
+       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+       tabindex="-1" value="" />
+    </form>
+  <br>
+</div>
   <%= yield %>
   <div class="footer">
   <p><b>Weatherstuff</b> on <a href="//github.com/gastongouron/weatherapp">github</a> &middot; crafted by <a href="//twitter.com/gastongouron">@gastongouron</a> &middot; thanks to <a href="openweathermap.org/">openweathermap.org</a>, <a href="openweathermap.org/">Google maps</a> and <a href="openweathermap.org/">Youtube</a> APIs</p>

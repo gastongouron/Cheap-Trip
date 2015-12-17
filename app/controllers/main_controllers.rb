@@ -15,7 +15,7 @@ get '/' do
 end
 
 post '/' do
-  @city = params[:city_name] ||= RANDOM_CITIES.sample
+  @city = params[:city_name] #||= RANDOM_CITIES.sample
   reload(@city)
   main(@city)
   erb :'index'
@@ -28,8 +28,9 @@ end
 
 def reload(city)
 
+  formated_city = city.delete(" ")
   api_key = ENV['SECRET2']
-  api_result = RestClient.get 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + api_key
+  api_result = RestClient.get 'http://api.openweathermap.org/data/2.5/weather?q=' + formated_city + '&appid=' + api_key
     @jhash = JSON.parse(api_result)
 
     @name        = @jhash['name']
@@ -80,6 +81,7 @@ def main(city)
         :maxResults => opts[:max_results]
       }
     )
+
     @yid = []
     @videos = []
     @channels = []

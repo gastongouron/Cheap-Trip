@@ -22,7 +22,6 @@ post '/' do
 end
 
 
-
 # OpenweatherMaps API call
 #private
 

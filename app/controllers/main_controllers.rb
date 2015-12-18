@@ -9,7 +9,6 @@ RANDOM_CITIES = ['Paris','San Francisco','New York','Bei Jin', 'Moscov', 'Kiev',
 get '/' do
   @city = params[:city_name] ||= RANDOM_CITIES.sample
   main(@city)
-
   reload(@city)
   erb :index, :locals => {results: @intro}
 end

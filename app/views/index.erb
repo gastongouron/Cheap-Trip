@@ -2,17 +2,91 @@
 
 <script type="text/javascript">
 
-var map;
-function initMap() {
+// var map;
+// function initMap() {
+//   map = new google.maps.Map(document.getElementById('map'), {
+//     center: {lat: <%= @lat %>, lng: <%= @lon %>},
+//     zoom: 6,
+//     mapTypeId: 'satellite',
+//     disableDefaultUI: true,
+//   });
+// }
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: <%= @lat %>, lng: <%= @lon %>},
-    zoom: 6,
-    mapTypeId: 'satellite',
-    disableDefaultUI: true,
+
+var map;
+var panorama;
+
+function initMap() {
+  var start =  {lat: <%= @lat %>, lng: <%= @lon %>};
+  var sv = new google.maps.StreetViewService();
+
+  panorama = new google.maps.StreetViewPanorama(document.getElementById('map'), {
+        position: {lat: <%= @lat %>, lng: <%= @lon %>},
+
+        addressControlOptions: {
+          position: google.maps.ControlPosition.BOTTOM_CENTER,
+        },
+        linksControl: false,
+        panControl: false,
+        enableCloseButton: false
+  });
+
+  // Set up the map.
+  // map = new google.maps.Map(document.getElementById('map'), {
+  //   center: start,
+  //   zoom: 16,
+  //   streetViewControl: false,
+  //   disableDefaultUI: true
+  // });
+
+  // Set the initial Street View camera to the center of the map
+  sv.getPanorama({location: start, radius: 50}, processSVData);
+
+  // Look for a nearby Street View panorama when the map is clicked.
+  // getPanoramaByLocation will return the nearest pano when the
+  // given radius is 50 meters or less.
+  map.addListener('click', function(event) {
+    sv.getPanorama({location: event.latLng, radius: 50}, processSVData);
   });
 }
+
+function processSVData(data, status) {
+  if (status === google.maps.StreetViewStatus.OK) {
+    var marker = new google.maps.Marker({
+      position: data.location.latLng,
+      map: map,
+      title: data.location.description
+    });
+
+    panorama.setPano(data.location.pano);
+    panorama.setPov({
+      heading: 270,
+      pitch: 0
+    });
+    panorama.setVisible(true);
+
+    marker.addListener('click', function() {
+      var markerPanoID = data.location.pano;
+      // Set the Pano to use the passed panoID.
+      panorama.setPano(markerPanoID);
+      panorama.setPov({
+        heading: 270,
+        pitch: 0
+      });
+      panorama.setVisible(true);
+    });
+  } else {
+    console.error('Street View data not found for this location.');
+  }
+}
 </script>
+
+
+
+
+
+
+
 <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=<%=DEVELOPER_KEY%>&callback=initMap">
 </script>
@@ -66,8 +140,8 @@ function initMap() {
 <div class="info">
     <div class="info__inner">
         <p>
-            <b>artist: </b><%= @videos[0] %> /
-            <b>Name: </b><%= @name %> /
+            <b>Playing: </b><%= @videos[0] %> /
+            <b>City: </b><%= @name %> /
             <b>Country: </b><%= @country %> /
             <b>Description: </b><%= @description %> /
             <b>Pressure: </b><%= @pressure %> hpa /
@@ -78,13 +152,10 @@ function initMap() {
             <b>Longitude: </b><%= @lon %> /
             <b>Latitude: </b><%= @lat %> /
             <b>Sunrise: </b><%= @sunrise %> /
-            <b>Sunset: </b><%= @sunrise %> /
-            <b>Country/state: </b><%= @country %> /
-            <b>Info from: </b><%= @base %> /
-            <b>City id: </b><%= @id %><br>
+            <b>Sunset: </b><%= @sunset %> /
+            <b>Info from: </b><%= @base %>
             <!-- <hr> -->
         </p>
 
-        <p><iframe src="http://ghbtns.com/github-btn.html?user=gastongouron&amp;repo=weather-app&amp;type=watch&amp;size=large" allowtransparency="true" frameborder="0" scrolling="0" width="77px" height="30px"></iframe></p>
     </div>
 </div>

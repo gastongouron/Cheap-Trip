@@ -2,7 +2,7 @@ DEVELOPER_KEY = ENV['SECRET1']
 DEVELOPER_KEY2 = ENV['SECRET2']
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
-RANDOM_CITIES = ['Paris','New-York','Bei-Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin', 'Bangkok', 'Seoul','Tokyo','Rio','Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
+RANDOM_CITIES = ['Paris','San Francisco','New York','Bei Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin', 'Bangkok', 'Seoul','Tokyo','Rio','Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
 
 
 # Routes
@@ -15,12 +15,11 @@ get '/' do
 end
 
 post '/' do
-  @city = params[:city_name] #||= RANDOM_CITIES.sample
+  @city = params[:city_name] || RANDOM_CITIES.sample
   reload(@city)
   main(@city)
   erb :'index'
 end
-
 
 # OpenweatherMaps API call
 #private
@@ -44,8 +43,8 @@ def reload(city)
     @clouds      = @jhash['clouds']['all']
     @windspeed   = @jhash['wind']['speed']
     @country     = @jhash['sys']['country']
-    @sunrise     = @jhash['sys']['sunrise']
-    @sunset      = @jhash['sys']['sunset']
+    @sunrise     = Time.at(@jhash['sys']['sunrise']).to_datetime
+    @sunset      = Time.at(@jhash['sys']['sunset']).to_datetime
     @lon         = @jhash['coord']['lon']
     @lat         = @jhash['coord']['lat']
 end
@@ -65,7 +64,7 @@ end
 def main(city)
 
   opts = Trollop::options do
-    opt :q, '', :type => String, :default => city
+    opt :q, '', :type => String, :default => "#{city} dj set techno"
     opt :max_results, 'Max results', :type => :int, :default => 1 #<- amount of results
   end
   client, youtube = get_service
@@ -98,9 +97,12 @@ def main(city)
       end
     end
 
+    @final_id = @yid.sample.to_s
+
+    puts @final_id
+    puts '------------------------'
     puts @videos
     puts @yid
-
     # puts "Videos:\n", videos, "\n"
     # puts "Channels:\n", channels, "\n"
     # puts "Playlists:\n", playlists, "\n"

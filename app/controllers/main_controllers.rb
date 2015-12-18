@@ -2,7 +2,7 @@ DEVELOPER_KEY = ENV['SECRET1']
 DEVELOPER_KEY2 = ENV['SECRET2']
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
-RANDOM_CITIES = ['Paris','San Francisco','New York','Bei Jin', 'Moscov', 'Kiev', 'Roma', 'Bangkok', 'Seoul','Tokyo','Rio','Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
+RANDOM_CITIES = ['Paris','San Francisco','New York','Bei Jin', 'Moscov', 'Kiev', 'Roma', 'Bangkok', 'Seoul','Tokyo','Riga' ,'Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
 
 
 # Routes
@@ -42,8 +42,8 @@ def reload(city)
     @clouds      = @jhash['clouds']['all']
     @windspeed   = @jhash['wind']['speed']
     @country     = @jhash['sys']['country']
-    @sunrise     = Time.at(@jhash['sys']['sunrise']).to_datetime
-    @sunset      = Time.at(@jhash['sys']['sunset']).to_datetime
+    @sunrise     = Time.at(@jhash['sys']['sunrise']).to_datetime.strftime("%H:%M:%S")
+    @sunset      = Time.at(@jhash['sys']['sunset']).to_datetime.strftime("%H:%M:%S")
     @lon         = @jhash['coord']['lon']
     @lat         = @jhash['coord']['lat']
 end

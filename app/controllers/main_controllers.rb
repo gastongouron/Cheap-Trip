@@ -2,7 +2,7 @@ DEVELOPER_KEY = ENV['SECRET1']
 DEVELOPER_KEY2 = ENV['SECRET2']
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
-RANDOM_CITIES = ['Paris','San Francisco','New York','Bei Jin', 'Moscov', 'Kiev', 'Roma', 'Berlin', 'Bangkok', 'Seoul','Tokyo','Rio','Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
+RANDOM_CITIES = ['Paris','San Francisco','New York','Bei Jin', 'Moscov', 'Kiev', 'Roma', 'Bangkok', 'Seoul','Tokyo','Rio','Praha','Stockolm','Barcelona','Phnom Penh','Kingston']
 
 
 # Routes
